@@ -24,6 +24,7 @@ int main(){
 	int seed;
 	scanf("%d", &seed);
 	printf("Seed: %d. Good luck! \n", seed);
+	sleep(1);
 	srand(seed);
 
 	int x_start_rand = (rand() % (x_table_dimension - 2)) + 1, y_start_rand = (rand() % (y_table_dimension - 2)) + 1;		// min 1, max dim - 2
