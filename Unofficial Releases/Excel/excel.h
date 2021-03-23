@@ -9,7 +9,7 @@
 class excel{
     private:
     std::vector<std::string> labels;
-    std::vector<std::vector<int>> my_data;
+    std::vector<std::vector<double>> my_data;
     std::string file_name;
     int length;
 

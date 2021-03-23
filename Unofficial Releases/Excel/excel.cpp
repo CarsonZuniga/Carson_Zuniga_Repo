@@ -51,7 +51,7 @@ excel::excel(std::string input_file){
                 input_vals.push_back(substring);
             }
             for(int i = 0; i < labels.size(); i++){
-                my_data[i].push_back(std::stoi(input_vals[i]));
+                my_data[i].push_back(std::stod(input_vals[i]));
             }
         }
         // std::cout << line << std::endl;
@@ -136,10 +136,10 @@ int excel::findSmallestInLabel(int index){
 }
 
 int excel::findSmallestInLabel(int index, int min_index, int max_index){
-    int min = my_data[index][min_index];
+    double min = my_data[index][min_index];
     int min_index_result = min_index;
     for(int i = min_index; i <= max_index && i < length; i++){
-        int new_value = my_data[index][i];
+        double new_value = my_data[index][i];
         if(new_value < min){
             min = new_value;
             min_index_result = i;
