@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <sstream>
 #include <algorithm>
+#include <cmath>
 
 excel::excel(){
     labels = {""};
@@ -91,10 +92,24 @@ void excel::printData(){
         }
         std::cout << std::endl;
     }
+    std::cout << "Sums:" << std::endl;
+    std::vector<double> sum = getSum();
+    for(int i = 0; i < labels.size(); i++){
+        std::cout << sum[i] << " ";
+    }
+    std::cout << std::endl;
+
     std::cout << "Means:" << std::endl;
     std::vector<double> mean = getMean();
     for(int i = 0; i < labels.size(); i++){
         std::cout << mean[i] << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << "StDevs:" << std::endl;
+    std::vector<double> StDev = getStDev();
+    for(int i = 0; i < labels.size(); i++){
+        std::cout << StDev[i] << " ";
     }
     std::cout << std::endl;
 }
@@ -148,15 +163,42 @@ int excel::findSmallestInLabel(int index, int min_index, int max_index){
     return min_index_result;
 }
 
-std::vector<double> excel::getMean(){
-    std::vector<double> result(my_data.size());
-    for(int i = 0; i < length; i++){
-        for(int j = 0; j < my_data.size(); j++)
+std::vector<double> excel::getSum(){
+    std::vector<double> result(labels.size());
+    for(int i = 0; i < length; i++)
+        for(int j = 0; j < labels.size(); j++)
             result[j] += my_data[j][i];
-    }
+
+    return result;
+}
+
+std::vector<double> excel::getMean(){
+    std::vector<double> result = getSum();
     
     for(int x = 0; x < my_data.size(); x++)
             result[x] /= length;
 
     return result;
+}
+
+std::vector<double> excel::getStDev(){
+    std::vector<double> mean = getMean();
+    std::vector<double> sum(labels.size());
+    for(int i = 0; i < length; i++){
+        for(int j = 0; j < labels.size(); j++){
+            sum[j] += (my_data[j][i] - mean[j]) * (my_data[j][i] - mean[j]);
+        }
+    }
+    for(int j = 0; j < labels.size(); j++){
+        sum[j] /= length;
+        sum[j] = sqrt(sum[j]);
+    }
+    return sum;
+}
+
+std::string excel::getLinearTreadline(int x, int y){
+    std::vector<double> mean = getMean();
+    double mean_x = mean[x], mean_y = mean[y];
+    double numerator = 0;
+    double denominator = 0;
 }

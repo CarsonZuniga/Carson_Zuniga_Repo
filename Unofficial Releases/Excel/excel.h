@@ -25,6 +25,8 @@ class excel{
     void sort(int index);
     int findSmallestInLabel(int index);
     int findSmallestInLabel(int index, int min_index, int max_index); // returns index of smallest value of given label, between given indices, inclusive
+    std::vector<double> getSum();
     std::vector<double> getMean();
-    
+    std::vector<double> getStDev();
+    std::string getLinearTreadline(int x, int y);   // returns line of best fit for y(x)
 };
