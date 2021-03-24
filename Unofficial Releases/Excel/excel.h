@@ -28,5 +28,8 @@ class excel{
     std::vector<double> getSum();
     std::vector<double> getMean();
     std::vector<double> getStDev();
-    std::string getLinearTreadline(int x, int y);   // returns line of best fit for y(x)
+    std::string getLinearTrendline(std::string x, std::string y);
+    std::string getLinearTrendline(int x, int y);   // returns line of best fit for y(x)
+    double getCorrelationCoefficient(std::string x, std::string y);
+    double getCorrelationCoefficient(int x, int y); // returns Correlation Coefficient, R
 };

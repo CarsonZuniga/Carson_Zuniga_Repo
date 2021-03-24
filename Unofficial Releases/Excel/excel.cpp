@@ -112,6 +112,11 @@ void excel::printData(){
         std::cout << StDev[i] << " ";
     }
     std::cout << std::endl;
+
+    std::cout << getLinearTrendline("t", "y(t)") << std::endl;
+
+    std::cout << "R: " << getCorrelationCoefficient("t", "y(t)") << std::endl;
+
 }
 
 void excel::sort(){
@@ -196,9 +201,74 @@ std::vector<double> excel::getStDev(){
     return sum;
 }
 
-std::string excel::getLinearTreadline(int x, int y){
+std::string excel::getLinearTrendline(std::string x, std::string y){
+    if(x == y)
+        return x + " = " + y + ". Could Not Find Linear Trendline.";
+    int x_index = -1, y_index = -1;
+    for(int i = 0; i < labels.size(); i++){
+        if(x == labels[i])
+            x_index = i;
+        if(y == labels[i])
+            y_index = i;
+    }
+    if(x_index != -1 && y_index != -1)
+        return getLinearTrendline(x_index, y_index);
+    else if(x_index == -1)
+        return "Could Not Find Label: " + x;
+    else
+        return "Could Not Find Label: " + y;
+}
+
+std::string excel::getLinearTrendline(int x, int y){
     std::vector<double> mean = getMean();
     double mean_x = mean[x], mean_y = mean[y];
     double numerator = 0;
     double denominator = 0;
+    for(int i = 0; i < length; i++){
+        numerator += (my_data[x][i] - mean_x) * (my_data[y][i] - mean_y);
+        denominator += (my_data[x][i] - mean_x) * (my_data[x][i] - mean_x);
+    }
+    double slope = numerator / denominator;
+    double y_intercept = mean_y - slope*mean_x;
+    return labels[y] + " = " + std::to_string(slope) + " * " + labels[x] + " + " + std::to_string(y_intercept);
+}
+
+double excel::getCorrelationCoefficient(std::string x, std::string y){
+    if(x == y){
+        std::cout << x << " = " << y << ". Could Not Find Correlation Coefficient." << std::endl;
+        return 0;
+    }
+    
+    int x_index = -1, y_index = -1;
+    for(int i = 0; i < labels.size(); i++){
+        if(x == labels[i])
+            x_index = i;
+        if(y == labels[i])
+            y_index = i;
+    }
+    if(x_index != -1 && y_index != -1)
+        return getCorrelationCoefficient(x_index, y_index);
+    else if(x_index == -1){
+        std::cout << "Could Not Find Label: " << x << std::endl;
+        return 0;
+    }
+    else{
+        std::cout << "Could Not Find Label: " << y << std::endl;
+        return 0;
+    }
+}
+
+double excel::getCorrelationCoefficient(int x, int y){
+    std::vector<double> mean = getMean();
+    double mean_x = mean[x], mean_y = mean[y];
+    double numerator = 0;
+    double denominator_x = 0;
+    double denominator_y = 0;
+    for(int i = 0; i < length; i++){
+        numerator += (my_data[x][i] - mean_x) * (my_data[y][i] - mean_y);
+        denominator_x += (my_data[x][i] - mean_x) * (my_data[x][i] - mean_x);
+        denominator_y += (my_data[y][i] - mean_y) * (my_data[y][i] - mean_y);
+        //(my_data[x][i] - mean_x) * (my_data[x][i] - mean_x)
+    }
+    return numerator / sqrt(denominator_x * denominator_y);
 }
