@@ -104,3 +104,15 @@ html, body {
 	vertical-align: middle;
 	cursor: pointer;
 }
+
+.variable-image {
+	display: block;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 50%;
+}
+
+.download-link {
+	text-align: center;
+	cursor: pointer;
+}
