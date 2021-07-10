@@ -23,14 +23,17 @@
 		<section class="content-section container">
 			<br>
 			<label for="width-input">Width:</label>
-			<input type="number" value="1920" id="width-input">
+			<input type="number" value="1920" min="1" id="width-input">
 			<label for="height-input">Height:</label>
-			<input type="number" value="1080" id="height-input">
+			<input type="number" value="1080" min="1" id="height-input">
+			<label for="height-input">No. Colors:</label>
+			<input type="number" value="2" min="1" id="no-colors-input">
 			<button class="btn" type="button" onclick="generateArt()">Generate Art!</button>
 			<script src="myScripts.js"></script>
 			<h2 class="section-header">Your Randomly Generated Art:</h2>
 			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png" class="variable-image" id="generated-image">
 			<p class="download-link" id="download-image"></p>
+			<p id="image-colors"></p>
 			<strong>July 9, 2021</strong>
 			South Elgin, Illinois
 			Generic Stadium
