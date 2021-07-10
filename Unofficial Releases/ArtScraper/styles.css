@@ -106,10 +106,11 @@ html, body {
 }
 
 .variable-image {
-	display: block;
+  	display: block;
   	margin-left: auto;
   	margin-right: auto;
-  	width: 50%;
+	max-width: 1000px;
+	max-height: 1000px;
 }
 
 .download-link {

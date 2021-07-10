@@ -22,40 +22,12 @@
 		</header>
 		<section class="content-section container">
 			<br>
-			<input type="number" value="256" id="dimension-input">
-			<button class="btn" type="button" onclick="funcClick()">Generate Art!</button>
-			<script type="text/javascript">
-				function funcClick() {
-					var input = document.getElementById("dimension-input").value;
-					var output = document.getElementById("generated-image");
-					var download_link = document.getElementById("download-image");
-					var canvas = document.createElement("canvas");
-
-					canvas.width = input;
-					canvas.height = input;
-					var ctx = canvas.getContext("2d");
-					
-					// Create gradient
-					var grd = ctx.createLinearGradient(0, 0, input, 0);
-					grd.addColorStop(0, "red");
-					grd.addColorStop(1, "white");
-
-					// Fill with gradient
-					ctx.fillStyle = grd;
-					ctx.fillRect(10, 10, input - 50, input - 20);
-
-					var url = canvas.toDataURL();
-					
-					var a = document.createElement('a');
-					a.download = 'random-art.png';
-					a.href = url;
-					a.textContent = 'Download PNG';
-
-					output.src = url;
-					download_link.innerHTML = '';
-					download_link.appendChild(a);
-				}
-			</script>
+			<label for="width-input">Width:</label>
+			<input type="number" value="1920" id="width-input">
+			<label for="height-input">Height:</label>
+			<input type="number" value="1080" id="height-input">
+			<button class="btn" type="button" onclick="generateArt()">Generate Art!</button>
+			<script src="myScripts.js"></script>
 			<h2 class="section-header">Your Randomly Generated Art:</h2>
 			<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png" class="variable-image" id="generated-image">
 			<p class="download-link" id="download-image"></p>
